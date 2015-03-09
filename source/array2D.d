@@ -461,12 +461,7 @@ unittest
             0,-1, 0]), tmp0.byElement.text);
 }
 
-version(unittest)
-{
-    void main(){}
-}
-else
-{
+version(unittest){} else {
 auto foo(Array2D!(float[]) a2d, size_t i0, size_t i1, size_t i2, float v)
 {
     version(LDC) pragma(LDC_never_inline);

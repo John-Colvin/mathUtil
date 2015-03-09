@@ -294,18 +294,18 @@ auto dftFreqs(ulong n, double d = 1.0)
 
 template ComplexComponentType(T)
 {
-    static if(is(T : creal))        alias ComplexComponentType = real;
-    static if(is(T : cdouble))      alias ComplexComponentType = double;
-    static if(is(T : cfloat))       alias ComplexComponentType = float;
-    static if(is(T : Complex!X, X)) alias ComplexComponentType = X;
+    static if(is(T == creal))        alias ComplexComponentType = real;
+    else static if(is(T == cdouble))      alias ComplexComponentType = double;
+    else static if(is(T == cfloat))       alias ComplexComponentType = float;
+    else static if(is(T : Complex!X, X)) alias ComplexComponentType = X;
 }
 
 unittest
 {
-    assert(is(ComplexComponentType!creal == real));
-    assert(is(ComplexComponentType!cdouble == double));
-    assert(is(ComplexComponentType!cfloat == float));
-    assert(is(ComplexComponentType!(Complex!double) == double));
+    static assert(is(ComplexComponentType!creal == real));
+    static assert(is(ComplexComponentType!cdouble == double));
+    static assert(is(ComplexComponentType!cfloat == float));
+    static assert(is(ComplexComponentType!(Complex!double) == double));
 }
 
 template BuiltinComplex(T)
